@@ -55,7 +55,7 @@ class ResearchAgent:
     def create_tasks(self):
         logger.info("Creating tasks")
         prompt = (f"You are tasked with researching the topic: {self.query}.\n"
-                  "Generate a list of **3 direct questions** "
+                  "Generate a list of **20 direct questions** "
                   "to explore this topic thoroughly.\n\n"
                   "Instructions:\n"
                   "- Do not ask questions where there is no definite answer or there is debate"
@@ -102,7 +102,7 @@ class ResearchAgent:
                       "Instructions:\n"
                       "- Provide a clear and well-reasoned answer.\n"
                       "- Keep the tone academic.\n"
-                      "- Avoid vague generalizations. Be specific and concise.\n"
+                      "- Should  be a single sentance.\n"
                       "- Don’t include any unnecessary comments.\n")
             messages = self._form_meessages(prompt)
             client = get_ollama_client()
@@ -118,10 +118,10 @@ class ResearchAgent:
 
     def _send_telegram(self, hash, question, answer):
         tg_msg = f"""
-__{hash}__
-**{question}**
-
+{question}
+---
 {answer}
+---
 """
         bot = self._get_bot()
         topic_id = self.hash_topic_dic[hash].message_thread_id
@@ -141,4 +141,10 @@ __{hash}__
 
 
 if __name__ == '__main__':
-    ResearchAgent("How to get started to make home Solar energy").create_tasks()
+    RESEARCH = """
+This study aims to assess the comparative analysis of India and China’s economic assistance to Maldives. Maldives is smallest country in South Asia. The republic of Maldives, so far, is one of the least known country in the international community. 
+Maldives, a group of 1200 islands spanning around 90,000 square kilometres in the Indian Ocean Region, has been in the limelight for the last decade. It has population around 5 lakhs. The archipelago country is strategically important for both India and the 
+Indian Ocean Region (IOR). The Maldivian economy is primarily driven by tourism and fish exports, and for decades India has been an important trade partner. At present, strategic significance of the Indian ocean region has been increased due to its location, vital 
+for trade and defence. In the Indian Ocean and South Asia, China and India are gaining a dominant role. Both nations are striving for influence in South Asia and the Indian Ocean region. The Maldives and Indo-China have a significant diplomatic relationship. The Maldives’ potential for self-development has been strengthened and their social and economic growth has been accelerated due to China’s consistent assistance. Both countries provide economic and humanitarian assistance to South Asian countries, and Maldives is one of them. This paper is divided into three parts: Firstly, to evaluate financial help provided by China and India to the Maldives. Secondly, to assess the Maldives response to this assistance provided by China and India to the Maldives. Thirdly, to explore problems and prospects associated with the help providing by China and India to the Maldives.    
+"""
+    ResearchAgent(RESEARCH).create_tasks()
