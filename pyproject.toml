@@ -1,0 +1,17 @@
+[project]
+name = "telegram_research"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.11"
+dependencies = [
+    "html2text>=2025.4.15",
+    "instructor>=1.9.0",
+    "ollama>=0.5.1",
+    "pytelegrambotapi>=4.27.0",
+    "python-dotenv>=1.1.1",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.12.0",
+]
