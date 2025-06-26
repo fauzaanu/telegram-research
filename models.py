@@ -29,9 +29,4 @@ class TelegramTopic(BaseModel):
     name: str
     icon_color_hex: str
 
-    @field_validator('icon_color_hex')
-    @classmethod
-    def validate_icon_color_hex(cls, v: str) -> str:
-        if not v.startswith('#') or len(v) != 7:
-            raise ValueError('icon_color_hex must start with "#" and be exactly 7 characters long')
-        return v
+    # TODO:  Color of the topic icon in RGB format. Currently, must be one of 0x6FB9F0, 0xFFD67E, 0xCB86DB, 0x8EEE98, 0xFF93B2, or 0xFB6F5F  #         :type icon_color: :obj:`int`
